@@ -37,7 +37,7 @@ public class StudentGradeCalculator {
             System.out.printf("%-30s %6.2f%n", subjects[i], marks[i]);
         }
 
-        System.out.println("==================================");
+        System.out.println("===================================");
         System.out.println("Total  \t\t\t\t\t\t   "+ total);
 
 
@@ -68,9 +68,5 @@ public class StudentGradeCalculator {
             System.out.println("Grade: F");
         }
 
-    }
-
-    public static void main(String[] args) {
-        new StudentGradeCalculator();
     }
 }
