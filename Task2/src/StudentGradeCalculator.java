@@ -22,12 +22,12 @@ public class StudentGradeCalculator {
         for (int i = 0; i < 4; i++) {
             System.out.print(subjects[i] + ": ");
             marks[i] = sc.nextFloat();
-            if(marks[i]<=100) {
+            if(marks[i]<=100 && marks[i]>=0) {
                 total += marks[i];
             }
             else{
                 marks[i] = 0;
-                System.out.println("Mark > 100, so "+subjects[i]+ "'s mark excluded");
+                System.out.println("Mark is between 0 and 100, so "+subjects[i]+ "'s mark excluded");
             }
         }
 
