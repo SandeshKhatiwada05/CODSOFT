@@ -31,7 +31,7 @@ public class StudentGradeCalculator {
             }
         }
 
-        System.out.println("\n\n"+name + " Your reports are as follow");
+        System.out.println("\n\n"+name + " Your reports are as follows");
         System.out.println("\nSubject Marks:");
         for (int i = 0; i < 4; i++) {
             System.out.printf("%-30s %6.2f%n", subjects[i], marks[i]);
