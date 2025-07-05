@@ -12,16 +12,20 @@ public class ATM implements ATMInterface{
 
     @Override
     public void withdrawing(float withdrawAmount) {
-
+        System.out.println("Withdrawing amount....");
+        Bank.amountAfterWithdrawing(withdrawAmount);
     }
 
     @Override
     public void deposit(float depositAmount) {
-
+        System.out.println("Depositing amount....");
+        Bank.amountAfterDeposit(depositAmount);
     }
 
     @Override
     public void checkingBalance() {
+        System.out.println("Checking Balance....");
+        Bank.checkAmount();
 
     }
 }

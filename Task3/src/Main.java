@@ -1,5 +1,27 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        System.out.println("Welcome to Sandesh's ATM");
+
+        System.out.println("What operation would you like to perform?");
+        System.out.println("1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit");
+        Scanner sc = new Scanner(System.in);
+        int option = sc.nextInt();
+        ATM atm = new ATM();
+
+        switch (option){
+            case 1:
+                atm.withdrawing(atm.amount());
+                break;
+            case 2:
+                atm.deposit(atm.amount());
+                break;
+            case 3:
+                atm.checkingBalance();
+                break;
+            default:
+                System.out.println("Invalid Option");
+        }
     }
 }
