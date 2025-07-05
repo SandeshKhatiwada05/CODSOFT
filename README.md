@@ -24,7 +24,7 @@ The internship focuses on enhancing core Java skills through practical, hands-on
 | Task No. | Title/Topic                  | Status   |
 |----------|------------------------------|----------|
 | Task 1   | NUMBER GAME                  | ✔️ Completed  |
-| Task 2   | STUDENT GRADE CALCULATOR     | ✔️ Completed (minor adjustmens needed)|
+| Task 2   | STUDENT GRADE CALCULATOR     | ✔️ Completed |
 | Task 3   | ATM INTERFACE                | 🔜 Its process  |
 | Task 3   | STUDENT MANAGEMENT SYSTEM    | 🔜 In process  |
 
