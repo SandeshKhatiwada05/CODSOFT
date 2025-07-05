@@ -6,7 +6,7 @@ public class Main {
 
         System.out.println("What operation would you like to perform?");
         do {
-            System.out.println("1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit\n");
+            System.out.println("\n\n1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit\n");
             Scanner sc = new Scanner(System.in);
             int option = sc.nextInt();
             ATM atm = new ATM();
