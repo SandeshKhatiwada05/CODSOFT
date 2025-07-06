@@ -8,7 +8,7 @@ public class Main {
         do {
             System.out.println("\n\n1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit\n");
             Scanner sc = new Scanner(System.in);
-            System.out.print("Option: ");
+            System.out.print("Option:  ");
             int option = sc.nextInt();
             ATM atm = new ATM();
 
