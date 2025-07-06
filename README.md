@@ -26,7 +26,8 @@ The internship focuses on enhancing core Java skills through practical, hands-on
 | Task 1   | NUMBER GAME                  | ✔️ Completed  |
 | Task 2   | STUDENT GRADE CALCULATOR     | ✔️ Completed |
 | Task 3   | ATM INTERFACE                | ✔️ Completed  |
-| Task 3   | STUDENT MANAGEMENT SYSTEM    | 🔜 In process  |
+| Task 4   | CURRENCY CONVERTER (API)        | 🔜 In process  |
+| Task 5   | STUDENT MANAGEMENT SYSTEM  (GUI)  | 🔜 In process  |
 
 
 ---
