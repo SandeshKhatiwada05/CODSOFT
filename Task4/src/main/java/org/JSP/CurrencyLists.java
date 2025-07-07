@@ -3,7 +3,8 @@ package org.JSP;
 public class CurrencyLists {
 
     public static void lists(){
-        System.out.println("🌍 Common Currency Codes:");
+        System.out.println("============================");
+        System.out.println("Common Currency Codes:");
         System.out.println("United States         - USD");
         System.out.println("Nepal                 - NPR");
         System.out.println("India                 - INR");
@@ -26,6 +27,7 @@ public class CurrencyLists {
         System.out.println("Indonesia             - IDR");
         System.out.println("Malaysia              - MYR");
         System.out.println("South Africa          - ZAR");
+        System.out.println("\n\n");
 
     }
 }
