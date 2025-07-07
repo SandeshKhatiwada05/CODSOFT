@@ -9,6 +9,7 @@ public class Main {
             System.out.println("\n1. See lists of currency codes\n2. Currency Exchange\n3. Exit");
             Scanner sc = new Scanner(System.in);
             int chooser = sc.nextInt();
+            System.out.println("Option: ");
 
             switch (chooser){
                 case 1:
@@ -22,7 +23,6 @@ public class Main {
                 default:
                     System.out.println("Invalid Option");
             }
-
         }while (true);
     }
 }
