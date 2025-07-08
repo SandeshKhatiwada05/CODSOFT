@@ -10,31 +10,40 @@ import java.util.Scanner;
 
 public class CurrencyConverter {
 
-    public CurrencyConverter() {
-        Scanner sc = new Scanner(System.in);
+    public CurrencyConverter(Scanner sc) {
+        System.out.println("------ CODSOFT Currency Converter ------");
 
-        System.out.println("CODSOFT's Currency Convertor");
-
-        System.out.print("Enter Currency you want to convert(e.g., AUD): ");
+        System.out.print("Enter base currency (e.g., AUD): ");
         String baseCurrency = sc.nextLine().toUpperCase();
 
-        System.out.print("Enter currency you want to convert (e.g., NPR): ");
+        System.out.print("Enter target currency (e.g., NPR): ");
         String targetCurrency = sc.nextLine().toUpperCase();
 
-        System.out.print("Enter Amount to Convert: ");
-        float amount = sc.nextFloat();
+        float amount = 0;
+        while (true) {
+            System.out.print("Enter amount to convert: ");
+            if (sc.hasNextFloat()) {
+                amount = sc.nextFloat();
+                sc.nextLine(); // consume newline
+                if (amount <= 0) {
+                    System.out.println("Please enter a positive amount.");
+                } else {
+                    break;
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                sc.nextLine(); // clear invalid input
+            }
+        }
 
         try {
-            // API key and URL
             String apiKey = "6eeaa8e64688d55adaba6181";
             String apiUrl = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + baseCurrency;
 
-            // Open connection
             URL url = new URL(apiUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            // Read response
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder response = new StringBuilder();
             String line;
@@ -44,7 +53,6 @@ public class CurrencyConverter {
             }
             in.close();
 
-            // Parse JSON
             JSONObject json = new JSONObject(response.toString());
 
             if (!json.getString("result").equals("success")) {
@@ -54,19 +62,20 @@ public class CurrencyConverter {
 
             JSONObject rates = json.getJSONObject("conversion_rates");
             if (!rates.has(targetCurrency)) {
-                System.out.println("Invalid Target Currency.");
+                System.out.println("Invalid target currency code.");
                 return;
             }
 
             float rate = rates.getFloat(targetCurrency);
             float convertedAmount = amount * rate;
 
-            System.out.printf("\n%.2f %s = %.2f %s\n", amount, baseCurrency, convertedAmount, targetCurrency);
+            System.out.println("\n====== Conversion Result ======");
+            System.out.printf("%.2f %s = %.2f %s\n", amount, baseCurrency, convertedAmount, targetCurrency);
+            System.out.println("===============================\n");
 
         } catch (Exception e) {
             System.out.println("An error occurred while fetching data.");
             e.printStackTrace();
         }
-        sc.close();
     }
 }
