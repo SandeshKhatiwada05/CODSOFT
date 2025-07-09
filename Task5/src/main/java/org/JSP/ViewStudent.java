@@ -33,28 +33,32 @@ public class ViewStudent extends JFrame {
                 }
             }
         };
-        backgroundPanel.setLayout(new BorderLayout());
+        backgroundPanel.setLayout(new GridBagLayout());
+        backgroundPanel.setOpaque(true);
 
         // Table model
         String[] columns = {"ID", "Name", "Roll Number", "Grade", "Email"};
         tableModel = new DefaultTableModel(columns, 0);
 
-        // JTable setup
+        // Table setup
         table = new JTable(tableModel);
         table.setFont(new Font("Arial", Font.PLAIN, 16));
         table.setRowHeight(28);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 16));
+        table.setShowGrid(true);
         table.setGridColor(Color.LIGHT_GRAY);
         table.setForeground(Color.BLACK);
         table.setBackground(Color.WHITE);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Horizontal scroll support
 
-        // Set preferred widths
+        // Important for scroll: prevent columns from squishing
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        // Set preferred widths (adjust for long Gmail)
         table.getColumnModel().getColumn(0).setPreferredWidth(50);   // ID
         table.getColumnModel().getColumn(1).setPreferredWidth(150);  // Name
-        table.getColumnModel().getColumn(2).setPreferredWidth(100);  // Roll Number
+        table.getColumnModel().getColumn(2).setPreferredWidth(120);  // Roll Number
         table.getColumnModel().getColumn(3).setPreferredWidth(100);  // Grade
-        table.getColumnModel().getColumn(4).setPreferredWidth(300);  // Email
+        table.getColumnModel().getColumn(4).setPreferredWidth(350);  // Email
 
         // Renderer
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) table.getDefaultRenderer(Object.class);
@@ -66,13 +70,26 @@ public class ViewStudent extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setPreferredSize(new Dimension(800, 450));  // Wider & taller
+        scrollPane.getViewport().setOpaque(true);
         scrollPane.getViewport().setBackground(Color.WHITE);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-        backgroundPanel.add(scrollPane, BorderLayout.CENTER);
+        // Card panel
+        JPanel cardPanel = new JPanel(new BorderLayout());
+        cardPanel.setOpaque(true);
+        cardPanel.setBackground(new Color(255, 255, 255, 220)); // translucent white
+        cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cardPanel.add(scrollPane, BorderLayout.CENTER);
 
+        // Centering the card
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(20, 20, 20, 20);
+        backgroundPanel.add(cardPanel, gbc);
+
+        // Frame setup
         setContentPane(backgroundPanel);
-        setSize(800, 600);
+        setSize(1000, 600);  // Wider window
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -87,7 +104,7 @@ public class ViewStudent extends JFrame {
             PreparedStatement ps = db.con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            tableModel.setRowCount(0); // Clear existing data
+            tableModel.setRowCount(0); // clear
 
             while (rs.next()) {
                 Object[] row = {
@@ -111,5 +128,5 @@ public class ViewStudent extends JFrame {
         }
     }
 
-
+ 
 }
