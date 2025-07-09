@@ -40,7 +40,7 @@ public class ViewStudent extends JFrame {
         String[] columns = {"ID", "Name", "Roll Number", "Grade", "Email"};
         tableModel = new DefaultTableModel(columns, 0);
 
-        // Table setup
+        // JTable setup
         table = new JTable(tableModel);
         table.setFont(new Font("Arial", Font.PLAIN, 16));
         table.setRowHeight(28);
@@ -49,6 +49,14 @@ public class ViewStudent extends JFrame {
         table.setGridColor(Color.LIGHT_GRAY);
         table.setForeground(Color.BLACK);
         table.setBackground(Color.WHITE);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);  // Disable auto-resize
+
+        // Set preferred widths
+        table.getColumnModel().getColumn(0).setPreferredWidth(50);   // ID
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);  // Name
+        table.getColumnModel().getColumn(2).setPreferredWidth(100);  // Roll
+        table.getColumnModel().getColumn(3).setPreferredWidth(100);  // Grade
+        table.getColumnModel().getColumn(4).setPreferredWidth(250);  // Email
 
         // Renderer
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) table.getDefaultRenderer(Object.class);
@@ -56,21 +64,23 @@ public class ViewStudent extends JFrame {
         renderer.setBackground(Color.WHITE);
         renderer.setForeground(Color.BLACK);
 
-        // Scroll pane setup
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(700, 400));
+        // Scroll pane setup (horizontal + vertical)
+        JScrollPane scrollPane = new JScrollPane(table,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setPreferredSize(new Dimension(750, 400));
         scrollPane.getViewport().setOpaque(true);
         scrollPane.getViewport().setBackground(Color.WHITE);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-        // Card panel for table
+        // Card-style panel
         JPanel cardPanel = new JPanel(new BorderLayout());
         cardPanel.setOpaque(true);
         cardPanel.setBackground(new Color(255, 255, 255, 220));
         cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         cardPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add to background panel (centered)
+        // Add to background (centered)
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
         backgroundPanel.add(cardPanel, gbc);
@@ -92,7 +102,7 @@ public class ViewStudent extends JFrame {
             PreparedStatement ps = db.con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            tableModel.setRowCount(0); // clear
+            tableModel.setRowCount(0); // Clear previous rows
 
             while (rs.next()) {
                 Object[] row = {
