@@ -87,7 +87,7 @@ public class InitalPage extends JFrame implements ActionListener {
         if (e.getSource() == btnAdd) {
             new StudentAddition();
         } else if (e.getSource() == btnEdit) {
-            System.out.println("Edit Students clicked");
+            new EditStudent();
         } else if (e.getSource() == btnView) {
             new ViewStudent();
         }
