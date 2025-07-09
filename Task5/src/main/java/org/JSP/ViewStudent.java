@@ -1,9 +1,11 @@
 package org.JSP;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
 import java.sql.*;
 
 public class ViewStudent extends JFrame {
@@ -15,13 +17,13 @@ public class ViewStudent extends JFrame {
     public ViewStudent() {
         // Load background image
         try {
-            backgroundImage = javax.imageio.ImageIO.read(new java.io.File("src/main/resources/Background.png"));
+            backgroundImage = ImageIO.read(new File("src/main/resources/Background.png"));
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Background image not found!");
         }
 
-        // Background panel with image
+        // Background panel
         JPanel backgroundPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -31,40 +33,50 @@ public class ViewStudent extends JFrame {
                 }
             }
         };
-        backgroundPanel.setLayout(new BorderLayout());
-        backgroundPanel.setOpaque(false);  // Keep transparent so bg image visible
+        backgroundPanel.setLayout(new GridBagLayout());
+        backgroundPanel.setOpaque(true);
 
-        // Table model with column names matching Student table
+        // Table model
         String[] columns = {"ID", "Name", "Roll Number", "Grade", "Email"};
         tableModel = new DefaultTableModel(columns, 0);
 
-        // JTable setup
+        // Table setup
         table = new JTable(tableModel);
-        table.setFillsViewportHeight(true);
-
-        // Set table background opaque white for readability
-        table.setOpaque(true);
-        table.setBackground(Color.WHITE);
-        table.setForeground(Color.BLACK);
         table.setFont(new Font("Arial", Font.PLAIN, 16));
-        table.setRowHeight(25);
+        table.setRowHeight(28);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 16));
+        table.setShowGrid(true);
+        table.setGridColor(Color.LIGHT_GRAY);
+        table.setForeground(Color.BLACK);
+        table.setBackground(Color.WHITE);
 
-        // Cell renderer opaque with white background
+        // Renderer
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) table.getDefaultRenderer(Object.class);
         renderer.setOpaque(true);
         renderer.setBackground(Color.WHITE);
         renderer.setForeground(Color.BLACK);
 
-        // JScrollPane setup
+        // Scroll pane setup
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setOpaque(false);                     // scroll pane transparent
-        scrollPane.getViewport().setOpaque(true);       // viewport opaque white
+        scrollPane.setPreferredSize(new Dimension(700, 400));
+        scrollPane.getViewport().setOpaque(true);
         scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-        backgroundPanel.add(scrollPane, BorderLayout.CENTER);
+        // Card panel for table
+        JPanel cardPanel = new JPanel(new BorderLayout());
+        cardPanel.setOpaque(true);
+        cardPanel.setBackground(new Color(255, 255, 255, 220));
+        cardPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cardPanel.add(scrollPane, BorderLayout.CENTER);
 
+        // Add to background panel (centered)
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(20, 20, 20, 20);
+        backgroundPanel.add(cardPanel, gbc);
+
+        // Frame setup
         setContentPane(backgroundPanel);
-
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -80,16 +92,16 @@ public class ViewStudent extends JFrame {
             PreparedStatement ps = db.con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            // Clear existing rows
-            tableModel.setRowCount(0);
+            tableModel.setRowCount(0); // clear
 
             while (rs.next()) {
-                Object[] row = new Object[5];
-                row[0] = rs.getInt("id");
-                row[1] = rs.getString("name");
-                row[2] = rs.getString("roll_number");
-                row[3] = rs.getString("grade");
-                row[4] = rs.getString("email");
+                Object[] row = {
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("roll_number"),
+                        rs.getString("grade"),
+                        rs.getString("email")
+                };
                 tableModel.addRow(row);
             }
 
@@ -98,14 +110,10 @@ public class ViewStudent extends JFrame {
             db.con.close();
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading students: " + e.getMessage(),
+            JOptionPane.showMessageDialog(this,
+                    "Error loading students: " + e.getMessage(),
                     "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void main(String[] args) {
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        SwingUtilities.invokeLater(ViewStudent::new);
-    }
 }
-    
