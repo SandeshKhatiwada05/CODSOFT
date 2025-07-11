@@ -1,6 +1,6 @@
 # Java Projects
 
-Welcome to my GitHub repository for the **Projects** – June 2025 Batch (B36). (https://www.codsoft.in/).
+Welcome to my GitHub repository for the **Projects** 
 
 ---
 
