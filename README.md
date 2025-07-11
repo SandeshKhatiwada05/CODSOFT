@@ -1,20 +1,9 @@
-# CODSOFT Internship – Java Programming (June 2025 Batch)
+# Java Projects
 
-Welcome to my GitHub repository for the **CodSoft Java Programming Internship** – June 2025 Batch (B36). This repo contains all the tasks/projects I completed during the 4-week virtual internship program offered by [CodSoft](https://www.codsoft.in/).
-
----
-
-## 📅 Internship Duration
-**Start Date:** June 25, 2025  
-**End Date:** July 25, 2025
+Welcome to my GitHub repository for the **Projects** – June 2025 Batch (B36). (https://www.codsoft.in/).
 
 ---
 
-## 📌 About the Internship
-
-The internship focuses on enhancing core Java skills through practical, hands-on tasks. Each task challenges problem-solving abilities and object-oriented programming understanding using Java.
-
----
 
 
 ---
@@ -47,7 +36,7 @@ The internship focuses on enhancing core Java skills through practical, hands-on
 ---
 
 ## 📌 Note
-This repository is maintained as part of the internship guidelines provided by CodSoft. All code is original and created solely for learning and development purposes.
+This is for learning and practice only
 
 ---
 
